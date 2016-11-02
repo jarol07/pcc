@@ -14,9 +14,9 @@ public class Servidor extends Nodo implements Runnable
     private final ServerSocket servidor;
     private List<Administrador> administradores;
         
-    public Servidor(String direccionLogica, int puerto, String nombre) throws IOException
+    public Servidor(String direccionLogica, int puerto) throws IOException
     {
-        super(direccionLogica, puerto, nombre);
+        super(direccionLogica, puerto);
         this.servidor = new ServerSocket(puerto);
         administradores=new ArrayList<>();
     }

@@ -4,17 +4,15 @@ public class Nodo
 {
     private String direccionLogica;
     private int puerto;
-    private String nombre;
 
     public Nodo()
     {
     }
     
-    public Nodo(String direccionLogica, int puerto, String nombre)
+    public Nodo(String direccionLogica, int puerto)
     {
         this.direccionLogica = direccionLogica;
         this.puerto = puerto;
-        this.nombre = nombre;
     }
     
     public String getDireccionLogica()
@@ -37,16 +35,4 @@ public class Nodo
         this.puerto = puerto;
     }
 
-    public String getNombre()
-    {
-        return nombre;
-    }
-
-    public void setNombre(String nombre)
-    {
-        this.nombre = nombre;
-    }
-    
-    
-    
 }

@@ -47,7 +47,7 @@ public class Administrador extends Thread
     {
         try
         {
-            objectOutput.writeObject("ADDED ["+nodo.getNombre()+"]"+nodo.getDireccionLogica()+":"+nodo.getPuerto());
+            objectOutput.writeObject("ADDED :: "+nodo.getDireccionLogica()+":"+nodo.getPuerto());
             while(true)
             {
                 Object object=objectInput.readObject();
@@ -55,11 +55,11 @@ public class Administrador extends Thread
                 String comando= (String) object;
                 if(agregarComando(comando))
                 {
-                    objectOutput.writeObject("ADDED [COMANDO :: "+nodo.getNombre()+"]"+comando);
+                    objectOutput.writeObject("ADDED [COMANDO :: "+nodo.getDireccionLogica()+":"+nodo.getPuerto()+"]"+comando);
                 }
                 else
                 {
-                    objectOutput.writeObject("ERROR [COMANDO :: "+nodo.getNombre()+"]"+comando);
+                    objectOutput.writeObject("ERROR [COMANDO :: "+nodo.getDireccionLogica()+":"+nodo.getPuerto()+"]"+comando);
                 }
             }
         } catch (IOException | ClassNotFoundException ex)

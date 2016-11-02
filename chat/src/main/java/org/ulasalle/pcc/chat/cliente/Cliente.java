@@ -17,17 +17,16 @@ public class Cliente extends Nodo implements Runnable
 {
     private List<Remoto> servidores;
 
-    public Cliente(String direccionLogica, int puerto, String nombre)
+    public Cliente()
     {
-        super(direccionLogica, puerto, nombre);
         servidores=new ArrayList<>();
     }
     
-    public void agregarServidor(Nodo nodo) throws IOException, ClassNotFoundException
+    public Nodo agregarRemoto(Nodo nodo) throws IOException, ClassNotFoundException
     {
-        Remoto servidor=new Remoto(new Socket(nodo.getDireccionLogica(), nodo.getPuerto()));
-        this.servidores.add(servidor);
-        System.out.println((String) servidor.getInput().readObject());
+        Remoto remoto=new Remoto(new Socket(nodo.getDireccionLogica(), nodo.getPuerto()));
+        this.servidores.add(remoto);
+        return nodo;
     }
     
     public void enviarComando(Nodo nodo,String comando) throws IOException, ClassNotFoundException
@@ -37,11 +36,33 @@ public class Cliente extends Nodo implements Runnable
             if(servidor.existe(nodo))
             {
                 servidor.getOutput().writeObject(comando);
-                System.out.println((String) servidor.getInput().readObject());
             }
         }
     }
 
+    public List<String> getComandos(Nodo nodo) 
+    {
+        for(Remoto servidor:servidores)
+        {
+            if(servidor.existe(nodo))
+            {
+                List<String> comandos=new ArrayList<>();
+                Object object;
+                while(true)
+                {
+                    try {
+                        object = servidor.getInput().readObject();
+                        comandos.add((String)object);
+                    } catch (IOException | ClassNotFoundException ex) {
+                        break;
+                    }
+                }
+                return comandos;
+            }
+        }
+        return null;
+    }
+    
     @Override
     public void run()
     {
@@ -55,10 +76,10 @@ public class Cliente extends Nodo implements Runnable
                 String direccionLogica=scanner.next();
                 System.out.println("Puerto:");
                 int puerto=scanner.nextInt();
-                agregarServidor(new Nodo(direccionLogica, puerto, "pc1"));
+                agregarRemoto(new Nodo(direccionLogica, puerto));
                 for(int i=0;i<30000;i++)
                 {
-                    enviarComando(new Nodo(direccionLogica, puerto, "pc1"), "comando "+i);
+                    enviarComando(new Nodo(direccionLogica, puerto), "comando "+i);
                   
                 }
             } catch (IOException | ClassNotFoundException ex)
