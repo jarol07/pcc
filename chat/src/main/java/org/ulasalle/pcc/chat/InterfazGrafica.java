@@ -324,7 +324,10 @@ public class InterfazGrafica extends javax.swing.JFrame
                 String valor=jList2.getSelectedValue();
                 int posicion=valor.indexOf(":");
                 List<String> comandos= cliente.getComandos(new Nodo(valor.substring(0,posicion), Integer.parseInt(valor.substring(posicion+1,valor.length()))));
-                System.out.println(comandos.size()+" "+valor.substring(0,posicion));
+                for(String comando:comandos)
+                {
+                    System.out.println(comando);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(InterfazGrafica.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
