@@ -40,7 +40,7 @@ public class Cliente extends Nodo implements Runnable
         }
     }
 
-    public List<String> getComandos(Nodo nodo) 
+    public List<String> getComandos(Nodo nodo) throws IOException, ClassNotFoundException 
     {
         for(Remoto servidor:servidores)
         {
@@ -48,15 +48,10 @@ public class Cliente extends Nodo implements Runnable
             {
                 List<String> comandos=new ArrayList<>();
                 Object object;
-                while(true)
-                {
-                    try {
+    
                         object = servidor.getInput().readObject();
                         comandos.add((String)object);
-                    } catch (IOException | ClassNotFoundException ex) {
-                        break;
-                    }
-                }
+
                 return comandos;
             }
         }
