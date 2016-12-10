@@ -1,33 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.ulasalle.pcc.quick;
 
 import java.util.Arrays;
+import java.util.Random;
 
-/**
- *
- * @author rodrigo
- */
-public class App {
+public class App
+{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        int[] array={9,20,5,8,2,1,10,0,3,6,-1,7};
-        //Burbble burble=new Burbble();
-        //burble.sort(array);
-        
-        Quick quick=new Quick();
-        quick.sort(array, 0, array.length-1);
-        
+    public static void main(String[] args)
+    {
+        int cantidad = 100000000;
+        Random random = new Random();
 
-        System.out.println(Arrays.toString(array));
-  
-        
+        int[] elementos = new int[cantidad];
+        for (int i = 0; i < cantidad; i++)
+            elementos[i] = random.nextInt(cantidad);
+
+        Quick quick = new Quick();
+        long startTime = System.currentTimeMillis();
+        quick.sort(elementos, 0, elementos.length - 1);
+        System.out.println("Tiempo:" + (System.currentTimeMillis() - startTime));
+//
+//        System.out.println(Arrays.toString(elementos));
+
     }
-    
+
 }

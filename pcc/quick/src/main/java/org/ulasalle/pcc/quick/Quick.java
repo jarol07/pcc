@@ -1,5 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.ulasalle.pcc.quick;
 
+/**
+ *
+ * @author rodrigo
+ */
 public class Quick {
     
     int partition(int array[],int left,int right){
@@ -35,6 +44,7 @@ public class Quick {
         }
         return i;
     }
+    
     
     public void sort(int array[],int left,int right){
         
